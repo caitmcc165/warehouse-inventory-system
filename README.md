@@ -1,45 +1,47 @@
-##Project Description
-This project implements a simplified inventory and order management system for warehousing, 
-developed for a fictional company. The system is designed to support efficient inventory access, 
-real-time inventory updates, order processing, priority-based task handling, and basic inventory anaytics.
-Multiple data structures are used to model real-world warehouse operations and ensure the system is efficient, 
-scalable, and fault-tolerant.
+# Warehouse Inventory System
 
+A Python-based inventory and order-management project that demonstrates how core data structures can support common warehouse operations such as stock lookup, inventory updates, FIFO order processing, priority handling, and low-stock reporting.
 
-##Function Descriptions
-The system contains 5 core Python functions, each addressing a specific operational requirement. The lookup_inventory 
-function retrieves the current stock level for a given product using its stock-keeping unit. This function facilitates 
-rapid inventory access by utilizing a dictionary structure and ensures that invalid product identifiers are handled 
-securely.
+## What This Project Demonstrates
 
-The update_inventory function updates inventory levels during restocking or shipping operations. It adjusts stock 
-quantities in real time while preventing invalid updates, such as reducing inventory below zero, to maintain data 
-integrity.
+- Fast inventory lookup using Python dictionaries
+- Inventory updates with validation to prevent negative stock
+- FIFO order processing with `collections.deque`
+- Priority-based task handling with `heapq`
+- Low-stock reporting and basic inventory analysis
+- Defensive error handling for invalid SKUs, insufficient inventory, and empty queues
 
-The process_orders function manages customer orders using a first-in, first-out workflow. Orders are processed in 
-the sequence they are received, ensuring predictable and fair order fulfillment.
+## Core Functions
 
-The process_priority_task function handles urgent tasks such as expedited orders or critical restocking requests. 
-Tasks are retrieved based on priority, ensuring that high-impact operations are addressed first.
+### `lookup_inventory(inventory, sku)`
+Returns the current quantity for a SKU and raises a clear error when the SKU does not exist.
 
-The generate_inventory_report function analyzes inventory data to identify items with low stock levels. This function 
-supports reporting and space optimization by highlighting products that may require replenishment.
+### `update_inventory(inventory, sku, quantity_change)`
+Adjusts stock for restocking or shipping while preventing inventory from dropping below zero.
 
+### `process_orders(order_queue)`
+Processes orders in first-in, first-out order using a queue.
 
-##How to Run the Program
-To run the system, open the Python source file in IntelliJ and execute it directly. When the program runs, a built-in 
-test block executes automatically, demonstrating the behavior of each function. Output is displayed in the Run window, 
-including successful operations and error conditions that are handled.
+### `process_priority_tasks(priority_queue)`
+Retrieves the highest-priority queued task using a heap-based priority queue.
 
+### `generate_inventory_report(inventory, low_stock_threshold)`
+Identifies products at or below a configurable low-stock threshold.
 
-##Error and Edge Case Handling
-The system is designed to handle errors and edge cases gracefully. Invalid product identifiers are detected and 
-reported without causing system failure. Inventory updates are validated to prevent harmful stock levels. Order and 
-priority task processing functions safely handle empty queues by raising meaningful exceptions. These safeguards ensure 
-reliable system behavior under unexpected or boundary conditions.
+## Technologies & Concepts
 
+- Python
+- Dictionaries
+- Queues / `deque`
+- Priority queues / `heapq`
+- Data structures and algorithms
+- Input validation
+- Exception handling
+- Inventory and warehouse workflow modeling
 
-##Summary
-This project demonstrates how multiple data structures can be applied effectively to solve real-world logistics 
-problems. By combining dictionaries, queues, and priority-based structures, the system meets the operational needs of 
-Corollary Warehousing while maintaining clarity, efficiency, and robustness.
+## Run Locally
+
+Requires Python 3.
+
+```bash
+python warehouse_system.py
